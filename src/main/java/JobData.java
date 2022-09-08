@@ -92,20 +92,21 @@ public class JobData {
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
         // load data, if not already loaded
         loadData();
+
         // ArrayList
         ArrayList<HashMap<String, String>> allJobs = JobData.findAll();
-        ArrayList<HashMap<String, String>> searchMatches = new ArrayList<>();
+        ArrayList<HashMap<String, String>> searchMatch = new ArrayList<>();
 
         for (HashMap<String, String> row: allJobs) {
             for (Map.Entry<String, String> column: row.entrySet()) {
                 if (column.getValue().toUpperCase().contains(value)) {
-                    if (Arrays.asList(searchMatches).contains(row)) {
+                    if (Arrays.asList(searchMatch).contains(row)) {
                     }
-                    searchMatches.add(row);
+                    searchMatch.add(row);
                 }
             }
         }
-        return searchMatches;
+        return searchMatch;
     }
     /**
      * Read in data from a CSV file and store it in a list
