@@ -76,14 +76,13 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toUpperCase().contains(value)) {
                 jobs.add(row);
             }
         }
 
         return jobs;
     }
-
     /**
      * Search all columns for the given term
      *
@@ -91,25 +90,22 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // load data, if not already loaded
         loadData();
+        // ArrayList
+        ArrayList<HashMap<String, String>> allJobs = JobData.findAll();
+        ArrayList<HashMap<String, String>> searchMatches = new ArrayList<>();
 
-        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-
-        for (HashMap<String, String> row : allJobs) {
-
-            for (Map.Entry<String, String> item : row.entrySet())
-                if (item.getValue().toLowerCase().contains(value.toLowerCase())) {
-                    jobs.add(row);
-                    break;
+        for (HashMap<String, String> row: allJobs) {
+            for (Map.Entry<String, String> column: row.entrySet()) {
+                if (column.getValue().toUpperCase().contains(value)) {
+                    if (Arrays.asList(searchMatches).contains(row)) {
+                    }
+                    searchMatches.add(row);
                 }
+            }
         }
-        if (jobs.size() < 1) {
-            System.out.println("Search complete. No results for '" + value + "' found.");
-        }
-
-        return jobs;
+        return searchMatches;
     }
     /**
      * Read in data from a CSV file and store it in a list

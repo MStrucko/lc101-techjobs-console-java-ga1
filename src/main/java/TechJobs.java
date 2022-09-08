@@ -58,8 +58,8 @@ public class TechJobs {
                 String searchField = getUserSelection("Search by:", columnChoices);
 
                 // What is their search term?
-                System.out.println("\nSearch term:" + '\n');
-                String searchTerm = in.nextLine();
+                System.out.println("\nSearch term:");
+                String searchTerm = in.nextLine().toUpperCase();
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
@@ -70,14 +70,14 @@ public class TechJobs {
         }
     }
 
-    // ﻿Returns the key of the selected item from the choices Dictionary
+    // Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
 
         int choiceIdx = -1;
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure ,so we can
+        // Put the choices in an ordered structure so we can
         // associate an integer with each one
         int i = 0;
         for (String choiceKey : choices.keySet()) {
@@ -119,28 +119,24 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+//        System.out.println("printJobs is not implemented yet");
 
-        for (HashMap<String, String> jobs: someJobs) {
-            System.out.println("*****");
-
-
-            for (HashMap.Entry<String, String> i: jobs.entrySet()) {
-                System.out.println(i.getKey() + ": " + i.getValue());
+        // Check if any jobs are in somejobs
+        if (someJobs.size() > 0) {
+            //Using a loop to iterate over Array of HashMap Objects (Jobs)
+            for (HashMap<String, String> aJob : someJobs) {
+                System.out.println("\n*****");
+                // Then nest a for-each loop to iterate over the Hashmap Objects
+                for(Map.Entry<String, String> data: aJob.entrySet()) {
+                    System.out.println(data.getKey() + ": " + data.getValue());
+                }
+                System.out.println("*****");
             }
-            System.out.println("*****" + '\n');
-
         }
-
-        if (someJobs.isEmpty()) {
-            System.out.println("No Results");
-
+        // Else if no jobs print "No Results"
+        else {
+            // Use print instead of println so that a new line is not printed after No Results to match the test output
+            System.out.print("No Results");
         }
     }
 }
-
-
-
-
-        //System.out.println("printJobs is not implemented yet");
-
-
