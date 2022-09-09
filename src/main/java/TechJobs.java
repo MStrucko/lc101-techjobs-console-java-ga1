@@ -123,7 +123,7 @@ public class TechJobs {
 
         // look to see if any jobs are in somejobs
         if (someJobs.size() > 0) {
-            //Use a loop to iterate over Array of HashMap Objects(jobs)
+            //Use a loop to iterate over Array of HashMap Objects(all of the jobs)
             for (HashMap<String, String> aJob : someJobs) {
                 System.out.println("\n*****");
                 // Use for-each loop to iterate over the Hashmap Objects
